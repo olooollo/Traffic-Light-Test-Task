@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Departments Tree</title>
+
+    <link rel="stylesheet" href="{{ bootstrap_css_cdn }}" />
+
+    <style>
+      .tree {
+        --indent: 1.25rem;
+      }
+      .tree-node {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.15rem 0;
+      }
+      .tree-children {
+        margin-left: var(--indent);
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        padding-left: 0.75rem;
+      }
+      .tree-toggle {
+        width: 2rem;
+      }
+      .tree-toggle .btn {
+        padding: 0.05rem 0.4rem;
+        line-height: 1.1;
+      }
+      .tree-label {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-light">
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+          <div class="card shadow-sm">
+            <div class="card-header bg-white">
+              <div class="d-flex align-items-center justify-content-between">
+                <h1 class="h5 mb-0">Departments</h1>
+              </div>
+            </div>
+
+            <div class="card-body">
+              {% if not tree %}
+                <div class="alert alert-warning mb-0">
+                  No departments found.
+                </div>
+              {% else %}
+                <div class="tree">
+                  {% for node in tree %}
+                    {% include "core/_node.html" with node=node %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ bootstrap_js_cdn }}"></script>
+  </body>
+</html>
+

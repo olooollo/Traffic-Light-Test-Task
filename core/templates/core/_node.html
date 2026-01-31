@@ -1,0 +1,33 @@
+<div class="tree-item">
+  <div class="tree-node">
+    <div class="tree-toggle">
+      {% if node.children %}
+        <button
+          class="btn btn-outline-secondary btn-sm"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#dept-children-{{ node.id }}"
+          aria-expanded="false"
+          aria-controls="dept-children-{{ node.id }}"
+          title="Expand/collapse"
+        >
+          +
+        </button>
+      {% else %}
+        <span class="text-muted">•</span>
+      {% endif %}
+    </div>
+
+    <div class="tree-label">
+      <span class="fw-semibold">{{ node.label }}</span>
+    </div>
+  </div>
+
+  {% if node.children %}
+    <div id="dept-children-{{ node.id }}" class="collapse tree-children">
+      {% for child in node.children %}
+        {% include "core/_node.html" with node=child %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
